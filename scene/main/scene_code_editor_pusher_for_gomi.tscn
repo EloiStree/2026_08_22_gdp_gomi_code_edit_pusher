@@ -1,0 +1,106 @@
+[gd_scene format=3 uid="uid://2syh2xru73o0"]
+
+[ext_resource type="Script" uid="uid://dvawafgxq5va" path="res://addons/2026_08_22_gdp_gomi_code_edit_pusher/scene/main/script/gomi_pusher_code_edit_submit_with_button.gd" id="1_fr5iy"]
+
+[node name="SceneCodeEditorPusherForGomi" type="Control" unique_id=1938970278]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GomiPusherCodeEditSubmitWithButton" type="Node" parent="." unique_id=1152394247 node_paths=PackedStringArray("code_to_execute_editor", "code_file_name", "button_to_submit_execute_once", "button_to_submit_execute_in_background", "button_to_stop_execute_in_background", "button_to_zoom_in", "button_to_zoom_out")]
+script = ExtResource("1_fr5iy")
+code_to_execute_editor = NodePath("../CodeEdit")
+code_file_name = NodePath("../Panel/HBoxContainer/LineEdit File Name")
+button_to_submit_execute_once = NodePath("../Panel/HBoxContainer/Button Stop")
+button_to_submit_execute_in_background = NodePath("../Panel/HBoxContainer/Button Background")
+button_to_stop_execute_in_background = NodePath("../Panel/HBoxContainer/Button Stop")
+button_to_zoom_in = NodePath("../Panel/HBoxContainer/Button Zoom")
+button_to_zoom_out = NodePath("../Panel/HBoxContainer/Button Unzoom")
+metadata/_custom_type_script = "uid://dvawafgxq5va"
+
+[node name="CodeEdit" type="CodeEdit" parent="." unique_id=2085797032]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.9
+grow_horizontal = 2
+grow_vertical = 2
+text = "extends Node
+
+func _ready():
+	GOMI.cmd(\"log Hello World\")
+
+"
+placeholder_text = "GOMI.sc(shortcut_line:String) # Ask to do action in format of some shortcut words to be executed in a text line 
+
+GOMI.cmd(command_line:String) # Ask to do action in format of a command line.
+
+GOMI.bool(boolean_name:String value:bool) # Allow to set a boolean value to true or false
+
+GOMI.bool(boolean_name:String value:bool) # Allow to set a boolean value to true or false
+
+GOMI.hook_boolean(name,value) # Allows to listen to any boolean changed in the app.
+
+GOMI.hook_analog(name,value) # Allows to listen to any analog input changed in the app.
+"
+symbol_lookup_on_click = true
+symbol_tooltip_on_hover = true
+line_folding = true
+gutters_draw_breakpoints_gutter = true
+gutters_draw_bookmarks = true
+gutters_draw_executing_lines = true
+gutters_draw_line_numbers = true
+gutters_zero_pad_line_numbers = true
+gutters_draw_fold_gutter = true
+code_completion_enabled = true
+indent_size = 2
+indent_use_spaces = true
+indent_automatic = true
+auto_brace_completion_enabled = true
+auto_brace_completion_highlight_matching = true
+
+[node name="Panel" type="Panel" parent="." unique_id=1109785074]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.9
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel" unique_id=1039317097]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button Zoom" type="Button" parent="Panel/HBoxContainer" unique_id=658176188]
+layout_mode = 2
+text = "  +  "
+
+[node name="Button Unzoom" type="Button" parent="Panel/HBoxContainer" unique_id=961237596]
+layout_mode = 2
+text = "  -  "
+
+[node name="LineEdit File Name" type="LineEdit" parent="Panel/HBoxContainer" unique_id=872199387]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "unnamed"
+placeholder_text = "File unique name to execute the code"
+
+[node name="Button Once" type="Button" parent="Panel/HBoxContainer" unique_id=799773932]
+layout_mode = 2
+text = "Once"
+
+[node name="Button Background" type="Button" parent="Panel/HBoxContainer" unique_id=1890543308]
+layout_mode = 2
+text = "Play"
+
+[node name="Button Stop" type="Button" parent="Panel/HBoxContainer" unique_id=781367671]
+layout_mode = 2
+text = "Stop"
