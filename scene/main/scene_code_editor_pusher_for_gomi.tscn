@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://2syh2xru73o0"]
 
 [ext_resource type="Script" uid="uid://dvawafgxq5va" path="res://addons/2026_08_22_gdp_gomi_code_edit_pusher/scene/main/script/gomi_pusher_code_edit_submit_with_button.gd" id="1_fr5iy"]
+[ext_resource type="Script" uid="uid://bmk62hwy2qys2" path="res://addons/2026_08_22_gdp_gomi_code_edit_pusher/scene/main/script/gomi_pusher_run_text_as_gdscript.gd" id="2_a30mo"]
 
 [node name="SceneCodeEditorPusherForGomi" type="Control" unique_id=1938970278]
 layout_mode = 3
@@ -10,12 +11,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="GomiPusherCodeEditSubmitWithButton" type="Node" parent="." unique_id=1152394247 node_paths=PackedStringArray("code_to_execute_editor", "code_file_name", "button_to_submit_execute_once", "button_to_submit_execute_in_background", "button_to_stop_execute_in_background", "button_to_zoom_in", "button_to_zoom_out")]
+[node name="GomiPusherCodeEditSubmitWithButton" type="Node" parent="." unique_id=1152394247 node_paths=PackedStringArray("code_to_execute_editor", "code_file_name", "button_to_submit_execute_once", "button_to_submit_execute_in_background", "button_to_submit_execute_as_main_script", "button_to_stop_execute_in_background", "button_to_zoom_in", "button_to_zoom_out")]
 script = ExtResource("1_fr5iy")
 code_to_execute_editor = NodePath("../CodeEdit")
 code_file_name = NodePath("../Panel/HBoxContainer/LineEdit File Name")
 button_to_submit_execute_once = NodePath("../Panel/HBoxContainer/Button Stop")
 button_to_submit_execute_in_background = NodePath("../Panel/HBoxContainer/Button Background")
+button_to_submit_execute_as_main_script = NodePath("../Panel/HBoxContainer/Button Main Script Run")
 button_to_stop_execute_in_background = NodePath("../Panel/HBoxContainer/Button Stop")
 button_to_zoom_in = NodePath("../Panel/HBoxContainer/Button Zoom")
 button_to_zoom_out = NodePath("../Panel/HBoxContainer/Button Unzoom")
@@ -29,10 +31,10 @@ anchor_bottom = 0.9
 grow_horizontal = 2
 grow_vertical = 2
 text = "extends Node
-
 func _ready():
-	GOMI.cmd(\"log Hello World\")
-
+  GOMI.cmd(\"log Hello World\")
+  GOMI.sc(\"😋\")
+  print(\"Hello World ;0\")
 "
 placeholder_text = "GOMI.sc(shortcut_line:String) # Ask to do action in format of some shortcut words to be executed in a text line 
 
@@ -104,3 +106,22 @@ text = "Play"
 [node name="Button Stop" type="Button" parent="Panel/HBoxContainer" unique_id=781367671]
 layout_mode = 2
 text = "Stop"
+
+[node name="Button Main Script Run" type="Button" parent="Panel/HBoxContainer" unique_id=971386523]
+layout_mode = 2
+text = "Reload Main"
+
+[node name="Main Script" type="Node" parent="." unique_id=657249459 node_paths=PackedStringArray("where_to_create_node")]
+script = ExtResource("2_a30mo")
+given_godot_code_to_execute = "extends Node
+func _ready():
+  GOMI.cmd(\"log Hello World\")
+  GOMI.sc(\"😋\")
+  print(\"Hello World ;0\")
+"
+where_to_create_node = NodePath(".")
+load_code_inspector_at_ready = false
+unique_code_file_name = "main_code_edit_script.gd"
+metadata/_custom_type_script = "uid://bmk62hwy2qys2"
+
+[connection signal="on_submit_gdscript_to_execute_as_main_script" from="GomiPusherCodeEditSubmitWithButton" to="Main Script" method="load_and_run_text_as_godot_script"]

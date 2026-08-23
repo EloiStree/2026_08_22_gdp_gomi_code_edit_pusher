@@ -1,5 +1,5 @@
 
-class_name GomiPusherRunTextAsGdscript
+class_name GomiPusherRunTextAsGdScript
 extends Node
 
 signal on_destroy_previous_node_start(node:Node)
