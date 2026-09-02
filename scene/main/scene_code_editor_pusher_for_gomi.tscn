@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://2syh2xru73o0"]
 
 [ext_resource type="Script" uid="uid://dvawafgxq5va" path="res://addons/2026_08_22_gdp_gomi_code_edit_pusher/scene/main/script/gomi_pusher_code_edit_submit_with_button.gd" id="1_fr5iy"]
+[ext_resource type="Script" uid="uid://bnjodou2k6otk" path="res://addons/2026_01_18_gdp_nes_controller_udp/script/save_load/nes_save_load_string_value_from_file_memory_code_edit.gd" id="2_7bvbj"]
 [ext_resource type="Script" uid="uid://bmk62hwy2qys2" path="res://addons/2026_08_22_gdp_gomi_code_edit_pusher/scene/main/script/gomi_pusher_run_text_as_gdscript.gd" id="2_a30mo"]
 
 [node name="SceneCodeEditorPusherForGomi" type="Control" unique_id=1938970278]
@@ -63,6 +64,13 @@ indent_use_spaces = true
 indent_automatic = true
 auto_brace_completion_enabled = true
 auto_brace_completion_highlight_matching = true
+
+[node name="NesSaveLoadStringValueFromFileMemoryCodeEdit" type="Node" parent="CodeEdit" unique_id=853611377 node_paths=PackedStringArray("to_affect")]
+script = ExtResource("2_7bvbj")
+to_affect = NodePath("..")
+save_unique_id = "CODE_EDIT"
+default_if_not_set = "extends Node"
+metadata/_custom_type_script = "uid://bnjodou2k6otk"
 
 [node name="Panel" type="Panel" parent="." unique_id=1109785074]
 layout_mode = 1
